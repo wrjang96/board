@@ -32,6 +32,8 @@ deploy:
     wait-until-deployed: true
 
   - provider: codedeploy
+    on:
+      all_branches: true
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: singa-travis-bucket
@@ -41,7 +43,6 @@ deploy:
     deployment_group: singapore-codedeploy-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-southeast-1
     wait-until-deployed: true
-
 
 # Travis CI 실행 완료 후 자동 알림 설정
 notifications:
