@@ -1,3 +1,10 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/app/step2/zip/
+    overwrite: yes
+
 permissions:
   - object: /
     pattern: "**"
@@ -9,9 +16,3 @@ hooks:
     - location: start.sh
       timeout: 60
       runas: ec2-user
-#version: 0.0
-#os: linux
-#files:
-#  - source: /
-#    destination: /home/ec2-user/app/step2/zip/
-#    overwrite: yes
