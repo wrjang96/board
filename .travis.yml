@@ -1,9 +1,10 @@
 language: java
-jdk: openjdk8
+jdk:
+  - openjdk8
 
-# Travis CI 를 어느 branch 가 push 될 때 수행할지 설정
-branches:
-  only: master
+branches: # 1.
+  only:
+    - master
 
 # gradle 통해 의존서을 받게 되면 해당 디렉토리에 cache 하여,
 # 같은 의존성은 다음 배포 때부터 받지 않도록 설정
@@ -15,12 +16,13 @@ cache:
 before_install:
   - chmod +x gradlew
 
-# branch 에 push 되었을 때 수행하는 명령어
 script: "./gradlew clean build"
+
 before_deploy:
   - zip -r board *
   - mkdir -p deploy
   - mv board.zip deploy/board.zip
+
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
@@ -35,11 +37,14 @@ deploy:
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
+
     bucket: singa-travis-bucket
     key: board.zip # 빌드 파일을 압축해서 전달
     bundle_type: zip # 압축 확장자
     application: singapore-codedeploy # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
+
     deployment_group: singapore-codedeploy-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
+
     region: ap-southeast-1
     wait-until-deployed: true
 
