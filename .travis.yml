@@ -6,8 +6,6 @@ branches: # 1.
   only:
     - master
 
-# gradle 통해 의존서을 받게 되면 해당 디렉토리에 cache 하여,
-# 같은 의존성은 다음 배포 때부터 받지 않도록 설정
 cache:
   directories:
     - '$HOME/.m2/repository'
@@ -25,7 +23,8 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: singa-travis-bucket
-    region: ap-southeast-1
+#    region: ap-southeast-1
+    region: ap-northeast-2
     skip_cleanup: true
     acl: private
     local_dir: deploy
@@ -41,7 +40,8 @@ deploy:
     bundle_type: zip # 압축 확장자
     application: singapore-codedeploy # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
     deployment_group: singapore-codedeploy-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
-    region: ap-southeast-1
+    # region: ap-southeast-1
+    region: ap-northeast-2
     wait-until-deployed: true
 
 # Travis CI 실행 완료 후 자동 알림 설정
