@@ -17,7 +17,7 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r board *
+  - zip -r board ./*
   - mkdir -p deploy
   - mv board.zip deploy/board.zip
 
@@ -43,7 +43,7 @@ deploy:
     application: singapore-codedeploy # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
     deployment_group: singapore-codedeploy-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-southeast-1
-    wait-until-deployed: true
+    wait_until_deployed: true
 
 # Travis CI 실행 완료 후 자동 알림 설정
 notifications:
