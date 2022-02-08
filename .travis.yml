@@ -13,9 +13,6 @@ cache:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
 
-before_install:
-  - chmod +x gradlew
-
 script: "./gradlew clean build"
 
 before_deploy:
@@ -37,14 +34,11 @@ deploy:
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-
     bucket: singa-travis-bucket
     key: board.zip # 빌드 파일을 압축해서 전달
     bundle_type: zip # 압축 확장자
     application: singapore-codedeploy # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
-
     deployment_group: singapore-codedeploy-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
-
     region: ap-southeast-1
     wait-until-deployed: true
 
