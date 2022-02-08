@@ -17,9 +17,9 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r board ./*
-  - mkdir -p deploy
-  - mv board.zip deploy/board.zip
+  - zip -r board *
+  - mkdir -p step2
+  - mv board.zip step2/board.zip
 
 deploy:
   - provider: s3
@@ -27,7 +27,7 @@ deploy:
     secret_access_key: $AWS_SECRET_KEY
     bucket: singa-travis-bucket
     region: ap-southeast-1
-    cleanup: true
+    skip_cleanup: true
     acl: private
     local_dir: deploy
     wait_until_deployed: true
