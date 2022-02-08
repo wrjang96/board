@@ -17,6 +17,20 @@ before_install:
 
 # branch 에 push 되었을 때 수행하는 명령어
 script: "./gradlew clean build"
+before_deploy:
+  - zip -r board *
+  - mkdir -p deploy
+  - mv board.zip deploy/board.zip
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: singa-travis-bucket
+    region: ap-southeast-1
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
 
 # Travis CI 실행 완료 후 자동 알림 설정
 notifications:
