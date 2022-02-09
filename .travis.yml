@@ -53,3 +53,5 @@ notifications:
   email:
     recipients:
       - wrjang@naver.com
+  notifications:
+    slack: personal-q3o6760:GIoKOGa1XcQJPju1922lOa6d
